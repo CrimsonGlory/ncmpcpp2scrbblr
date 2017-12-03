@@ -40,12 +40,18 @@ CLIVER="0.11"
 while [ 1 ]; do
 
     # now get all information from ncmpcpp
-    genre=$(/usr/bin/ncmpcpp --now-playing "{%g}")
-    title=$(/usr/bin/ncmpcpp --now-playing "{%t}|{%f}")
-    artist=$(/usr/bin/ncmpcpp --now-playing "{%a}|{<unknown>}")
-    album=$(/usr/bin/ncmpcpp --now-playing "{%b}|{<unknown>}")
-    year=$(/usr/bin/ncmpcpp --now-playing "{%y}")
-    length=$(/usr/bin/ncmpcpp --now-playing "%l" | grep -E -o -e "^[0-9]+:[0-9]+$" | sed "s/:/*60+/g"  | bc | tr -d \"\n\" )
+    genre=$(/usr/bin/ncmpcpp --current-song="{%g}")
+    title=$(/usr/bin/ncmpcpp --current-song="{%t}|{%f}")
+    artist=$(/usr/bin/ncmpcpp --current-song="{%a}|{<unknown>}")
+    album=$(/usr/bin/ncmpcpp --current-song="{%b}|{<unknown>}")
+    year=$(/usr/bin/ncmpcpp --current-song="{%y}")
+    length=$(/usr/bin/ncmpcpp --current-song="%l" | grep -E -o -e "^[0-9]+:[0-9]+$" | sed "s/:/*60+/g"  | bc | tr -d \"\n\" )
+    echo "genre=$genre"
+    echo "title=$title"
+    echo "artist=$artist"
+    echo "album=$album"
+    echo "year=$year"
+    echo "length=$length"
 
     # check if we have artist and title
     # else print error message to stderr
